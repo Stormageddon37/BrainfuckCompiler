@@ -1,5 +1,8 @@
+from commander import initialize_program
+
+
 def main():
-	pass
+	print(initialize_program())
 
 
 if __name__ == '__main__':
