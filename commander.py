@@ -13,7 +13,7 @@ def initialize_program(bf_code):
 		public static int nextClosingBracket(int index) {{ 
 			for(int i = index; i < code.length; i++) {{
 				if (code[i] == ']') {{
-					return i+1;
+					return i;
 				}}
 			}}
 			return index;
