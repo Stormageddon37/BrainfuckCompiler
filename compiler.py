@@ -2,7 +2,7 @@ import os
 
 
 def compile_file(filename: str):
-	os.system(f'javac {filename}')
+	os.system(f'javac {filename}.java')
 
 
 def execute_file(filename: str):
