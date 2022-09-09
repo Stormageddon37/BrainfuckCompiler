@@ -3,12 +3,38 @@ import config
 
 def initialize_program(bf_code):
 	return f"""
+	import java.util.Scanner;
+	
 	public class Main {{
-		private static byte[] memory = new byte[{config.MEMORY_SIZE}];
 		private static char[] code = "{bf_code}".toCharArray();
-		
+		private static byte[] memory = new byte[{config.MEMORY_SIZE}];
+		private static Scanner input = new Scanner(System.in);
 		private static int instruction_pointer = 0;
 		private static int memory_pointer = 0;
+		
+		private static void forwards() {{
+			memory_pointer++;
+		}}
+		
+		private static void backwards() {{
+			memory_pointer--;
+		}}
+		
+		private static void increment() {{
+			memory[memory_pointer]++;
+		}}
+		
+		private static void decrement() {{
+			memory[memory_pointer]--;
+		}}
+		
+		private static void output_from() {{
+			System.out.print((char) memory[memory_pointer]);
+		}}
+		
+		private static void input_to(int index) {{
+			memory[index] = input.nextByte();
+		}}
 		
 		public static boolean validate_code(char[] code) {{
 			int opener = 0;
@@ -28,44 +54,13 @@ def initialize_program(bf_code):
 			return opener == closer;
 		}}		
 		
-		public static int MatchingClosingBracket(int index) {{
-			int bracket_count = 1;
-			for(int i = index+1; i < code.length; i++) {{
-				if (code[i] == '[') {{
-					bracket_count++;			
-				}}
-				else if (code[i] == ']') {{
-					bracket_count--;
-					if (bracket_count == 0) {{
-					return i;
-					}}
-				}}
-			}}
-			return index;
-		}}
-		
-		public static int MatchingOpeningBracket(int index) {{
-			int bracket_count = 1;
-			for(int i = index-1; i < code.length; i--) {{
-				if (code[i] == ']') {{
-					bracket_count++;			
-				}}
-				else if (code[i] == '[') {{
-					bracket_count--;
-					if (bracket_count == 0) {{
-					return i;
-					}}
-				}}
-			}}
-			return index;
-		}}
+
 		
 		public static void main(String[] args) {{
-			System.out.println("hello");
-			System.out.println(code);
 			if (!validate_code(code)) {{
-				throw new Exception("Invalid Brainfuck");
+				System.exit(0);
 			}}
-		}}
-	}}
+			//code starts here
+
+		
 	"""
