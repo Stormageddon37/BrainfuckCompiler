@@ -28,7 +28,7 @@ def initialize_program(bf_code):
 			return opener == closer;
 		}}		
 		
-		public static int nextMatchingBracket(int index) {{
+		public static int MatchingClosingBracket(int index) {{
 			int bracket_count = 1;
 			for(int i = index+1; i < code.length; i++) {{
 				if (code[i] == '[') {{
@@ -44,9 +44,28 @@ def initialize_program(bf_code):
 			return index;
 		}}
 		
+		public static int MatchingOpeningBracket(int index) {{
+			int bracket_count = 1;
+			for(int i = index-1; i < code.length; i--) {{
+				if (code[i] == ']') {{
+					bracket_count++;			
+				}}
+				else if (code[i] == '[') {{
+					bracket_count--;
+					if (bracket_count == 0) {{
+					return i;
+					}}
+				}}
+			}}
+			return index;
+		}}
+		
 		public static void main(String[] args) {{
 			System.out.println("hello");
 			System.out.println(code);
+			if (!validate_code(code)) {{
+				throw new Exception("Invalid Brainfuck");
+			}}
 		}}
 	}}
 	"""
