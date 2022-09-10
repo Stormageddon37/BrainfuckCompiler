@@ -1,45 +1,13 @@
-from utils import matching_closing_bracket, matching_opening_bracket
-
-
-def loop_start(code, index) -> str:
-	closing_index = matching_closing_bracket(code, index)
-
-	return """
-	if(memory[memory_pointer] == 0) {
-		instruction_pointer = MatchingClosingBracket(instruction_pointer)+1;
-	}
-	else {
-		instruction_pointer++;
-	}
-	"""
-
-
-def loop_end(code, index) -> str:
-	opening_index = matching_opening_bracket(code, index)
-
-	return """
-	if(memory[memory_pointer] != 0){
-		instruction_pointer = MatchingOpeningBracket(instruction_pointer)+1;
-	}
-	else {
-		instruction_pointer++;
-	}
-	"""
-
-
-def determine(code, index):
+def determine(code, index) -> str:
 	big_dict = {
-		'>': 'forwards();',
-		'<': 'backwards();',
-		'+': 'increment();',
-		'-': 'decrement();',
-		'.': 'output_from();',
-		',': 'input_to();',
+		'>': 'memory_pointer++;',
+		'<': 'memory_pointer--;',
+		'+': 'memory[memory_pointer]++;',
+		'-': 'memory[memory_pointer]--;',
+		'.': 'System.out.print((char) memory[memory_pointer]);',
+		',': 'System.out.println();\nmemory[memory_pointer] = input.nextByte();',
+		'[': 'while(memory[memory_pointer] != 0) {',
+		']': '}'
 	}
 
-	if code[index] == '[':
-		return loop_start(code, index)
-	elif code[index] == ']':
-		return loop_end(code, index)
-	else:
-		return big_dict[code[index]]
+	return big_dict[code[index]]
