@@ -5,7 +5,7 @@ def initialize_program(bf_code):
 	return f"""import java.util.Scanner;
 
 public class Main {{
-	private static char[] code = "{bf_code}".toCharArray();
+	private static char[] code = "{''.join(bf_code)}".toCharArray();
 	private static byte[] memory = new byte[{config.MEMORY_SIZE}];
 	private static Scanner input = new Scanner(System.in);
 	private static int instruction_pointer = 0;
