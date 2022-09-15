@@ -1,7 +1,7 @@
 from commander import initialize_program
 from compiler import compile_file, execute_file
 from interperter import determine
-from utils import write_to_file, read_file
+from utils import write_to_file, read_file, delete_file
 
 
 def main():
@@ -13,6 +13,7 @@ def main():
 	write_to_file('Main.java', initialize_program(bf_code=''.join(brainfuck_code)) + java_bf + '\t}\n}')
 	compile_file('Main.java')
 	execute_file('Main')
+	delete_file('Main.class')
 
 
 if __name__ == '__main__':

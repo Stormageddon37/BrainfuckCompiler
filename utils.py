@@ -1,3 +1,6 @@
+import os
+
+
 def read_file(filename: str) -> list[str]:
 	with open(file=filename, mode='r') as file:
 		return [x for x in remove_newlines(file.read())]
@@ -10,3 +13,11 @@ def write_to_file(filename: str, content: str) -> None:
 
 def remove_newlines(content: str) -> str:
 	return content.replace('\n', '')
+
+
+def delete_file(filename: str) -> bool:
+	if os.path.exists(filename):
+		os.remove(filename)
+		return True
+	else:
+		return False
