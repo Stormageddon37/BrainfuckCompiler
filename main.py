@@ -5,12 +5,16 @@ from utils import write_to_file, read_file, delete_file
 
 
 def main():
-	brainfuck_code = read_file('input.bf')
-	java_bf = ''
-	for i, char in enumerate(brainfuck_code):
-		java_bf += 3 * '\t' + determine(code=brainfuck_code, index=i) + '\n'
+	original_bf_code = read_file('input.bf')
+	java_bf_code = ''
+	for i, char in enumerate(original_bf_code):
+		java_bf_code += 3 * '\t'
+		java_bf_code += determine(code=original_bf_code, index=i)
+		java_bf_code += '\n'
 
-	write_to_file('Main.java', initialize_program(bf_code=''.join(brainfuck_code)) + java_bf + '\t}\n}')
+	content = initialize_program(original_bf_code)
+	content += java_bf_code + '\t}\n}'
+	write_to_file('Main.java', content)
 	compile_file('Main.java')
 	execute_file('Main')
 	delete_file('Main.class')
