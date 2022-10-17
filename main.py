@@ -1,6 +1,6 @@
 from commander import initialize_program
 from compiler import compile_file, execute_file
-from interperter import determine
+from interpreter import determine
 from utils import write_to_file, read_file, delete_file
 
 
